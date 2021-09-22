@@ -36,7 +36,12 @@ const allOptionsStatic = [
   },
 ];
 
-export default () => {
+export default ({ municipios }) => {
+  console.log(municipios);
+
+  useEffect(() => {
+    setAllOptions(municipios);
+  }, []);
   const [allOptions, setAllOptions] = useState(allOptionsStatic);
   const [selectedOptions, setSelected] = useState([]);
   const [isLoading, setLoading] = useState(false);
@@ -45,6 +50,7 @@ export default () => {
   const onChange = (selectedOptions) => {
     setSelected(selectedOptions);
   };
+  console.log(allOptions);
 
   const onSearchChange = useCallback((searchValue) => {
     setLoading(true);
