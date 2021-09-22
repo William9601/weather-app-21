@@ -1,9 +1,11 @@
 import './App.css';
+import Home from './components/Pages/Home/Home';
+import '@elastic/eui/dist/eui_theme_light.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <Home />
     </div>
   );
 }

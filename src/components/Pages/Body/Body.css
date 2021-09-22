@@ -1,0 +1,12 @@
+.body-container {
+  background-color: #27527d;
+  padding: 2em;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+}
+
+.card-container {
+  width: 80vh;
+  height: 70vh;
+}
