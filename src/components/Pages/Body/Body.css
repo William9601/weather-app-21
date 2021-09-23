@@ -10,3 +10,8 @@
   width: 80vh;
   height: 70vh;
 }
+
+.card-container h1 {
+  color: #f1e5da;
+  font-size: 24px;
+}

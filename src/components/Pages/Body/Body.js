@@ -6,11 +6,15 @@ const Body = ({ city, temperaturaData, lluviaData }) => {
   return (
     <div className="body-container">
       <div className="card-container">
-        <Card
-          city={city}
-          temperaturaData={temperaturaData}
-          lluviaData={lluviaData}
-        />
+        {city ? (
+          <Card
+            city={city}
+            temperaturaData={temperaturaData}
+            lluviaData={lluviaData}
+          />
+        ) : (
+          <h1>Por favor seleccione un municipio</h1>
+        )}
       </div>
     </div>
   );

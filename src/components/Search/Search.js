@@ -6,8 +6,6 @@ export default ({ municipios, setCodProv, setCity, setCodeIne }) => {
   const [isLoading, setLoading] = useState(false);
   const [options, setOptions] = useState([]);
 
-  let searchTimeout;
-
   const onChange = (selectedOptions) => {
     setSelected(selectedOptions);
   };
@@ -34,8 +32,6 @@ export default ({ municipios, setCodProv, setCity, setCodeIne }) => {
     setLoading(true);
     setOptions([]);
 
-    clearTimeout(searchTimeout);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
 
     setLoading(false);
@@ -57,8 +53,9 @@ export default ({ municipios, setCodProv, setCity, setCodeIne }) => {
 
   return (
     <EuiComboBox
-      placeholder="Search asynchronously"
+      placeholder="Busca municipio"
       async
+      singleSelection={{ asPlainText: true }}
       options={options}
       selectedOptions={selectedOptions}
       isLoading={isLoading}

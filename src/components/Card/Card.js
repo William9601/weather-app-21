@@ -6,7 +6,12 @@ const Card = ({ city, temperaturaData, lluviaData }) => {
       <EuiFlexItem>
         <EuiCard
           layout="horizontal"
-          icon={<EuiIcon size="xl" type={'cloudSunny'} />}
+          icon={
+            <EuiIcon
+              size="xl"
+              type={lluviaData === '0' ? 'cloudSunny' : 'cloudDrizzle'}
+            />
+          }
           title={city}
           description={`Temperatura: ${temperaturaData}º  Probabilidad de lluvia: ${lluviaData}`}
           onClick={() => {}}

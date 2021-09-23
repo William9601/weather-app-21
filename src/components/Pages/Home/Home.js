@@ -2,10 +2,12 @@ import './Home.css';
 import Header from '../../Header/Header';
 import Body from '../Body/Body';
 import { useEffect, useState } from 'react';
+import { fetchMunicipios, fetchMeteoData } from '../../../services/apiServices';
 
 const Home = () => {
   const [municipios, setMunicipios] = useState([]);
   const [codProv, setCodProv] = useState('');
+  const [provincia, setProvincia] = useState('');
   const [city, setCity] = useState('');
   const [codeIne, setCodeIne] = useState('');
   const [meteoData, setMeteoData] = useState([]);
@@ -13,34 +15,17 @@ const Home = () => {
   const [temperaturaData, setTemperaturaData] = useState('');
 
   useEffect(() => {
-    fetchMunicipios();
+    fetchMunicipios().then((data) => setMunicipios(data));
   }, []);
 
-  const fetchMunicipios = async () => {
-    const res = await fetch('https://www.el-tiempo.net/api/json/v2/municipios');
-    const fetchData = await res.json();
-    setMunicipios(fetchData);
-  };
-
   useEffect(() => {
-    fetchMeteoData();
+    fetchMeteoData(codProv, codeIne).then((data) => {
+      setMeteoData(data);
+      setLluviaData(data.lluvia);
+      setTemperaturaData(data.temperatura_actual);
+      setProvincia(data.municipio.NOMBRE_PROVINCIA);
+    });
   }, [city]);
-
-  const fetchMeteoData = async () => {
-    const res = await fetch(
-      `https://www.el-tiempo.net/api/json/v2/provincias/${codProv}/municipios/${codeIne}`
-    );
-    const fetchData = await res.json();
-    setMeteoData(fetchData);
-    setLluviaData(fetchData.lluvia);
-    setTemperaturaData(fetchData.temperatura_actual);
-  };
-
-  console.log(temperaturaData);
-
-  //const nombreMunicipios = municipios.map((el) => {
-  //  return el.NOMBRE;
-  //});
 
   return municipios.length > 0 ? (
     <div className="home-container">
@@ -49,7 +34,7 @@ const Home = () => {
         setCodProv={setCodProv}
         setCity={setCity}
         setCodeIne={setCodeIne}
-        city={city}
+        provincia={provincia}
       />
       <Body
         city={city}
