@@ -1,16 +1,17 @@
 import './Body.css';
 import Card from '../../Card/Card';
-import { municipios } from '../../../data';
 
-const Body = ({ nombreMunicipio, temperaturaActual, previsionLluvia }) => {
+const Body = ({ globalData }) => {
   return (
     <div className="body-container">
       <div className="card-container">
-        {nombreMunicipio ? (
+        {globalData.nombreMunicipio ? (
           <Card
-            title={nombreMunicipio}
-            description={`Temperatura: ${temperaturaActual}º  Probabilidad de lluvia: ${previsionLluvia}`}
-            iconType={previsionLluvia === '0' ? 'cloudSunny' : 'cloudDrizzle'}
+            title={globalData.nombreMunicipio}
+            description={`Temperatura: ${globalData.temperaturaActual}º  Probabilidad de lluvia: ${globalData.previsionLluvia}`}
+            iconType={
+              globalData.previsionLluvia === '0' ? 'cloudSunny' : 'cloudDrizzle'
+            }
           />
         ) : (
           <h1>Por favor seleccione un municipio</h1>
