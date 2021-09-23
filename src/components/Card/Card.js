@@ -1,14 +1,14 @@
 import { EuiCard, EuiIcon, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
 
-const Card = () => {
+const Card = ({ city, temperaturaData, lluviaData }) => {
   return (
     <EuiFlexGroup gutterSize="l">
       <EuiFlexItem>
         <EuiCard
           layout="horizontal"
           icon={<EuiIcon size="xl" type={'cloudSunny'} />}
-          title={'data'}
-          description="This card adds uses an 'xl' size icon which works well in a horizontal layout."
+          title={city}
+          description={`Temperatura: ${temperaturaData}º  Probabilidad de lluvia: ${lluviaData}`}
           onClick={() => {}}
         />
       </EuiFlexItem>

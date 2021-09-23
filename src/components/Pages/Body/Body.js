@@ -2,14 +2,15 @@ import './Body.css';
 import Card from '../../Card/Card';
 import { municipios } from '../../../data';
 
-const Body = () => {
-  const city = municipios.municipios;
-  const list = [1, 2, 3];
-
+const Body = ({ city, temperaturaData, lluviaData }) => {
   return (
     <div className="body-container">
       <div className="card-container">
-        <Card />
+        <Card
+          city={city}
+          temperaturaData={temperaturaData}
+          lluviaData={lluviaData}
+        />
       </div>
     </div>
   );
