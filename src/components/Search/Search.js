@@ -1,7 +1,12 @@
 import { EuiComboBox } from '@elastic/eui';
 import { useState, useEffect, useCallback } from 'react';
 
-export default ({ municipios, setCodProv, setCity, setCodeIne }) => {
+export default ({
+  listaMunicipios,
+  setCodigoProvincia,
+  setNombreMunicipio,
+  setCodigoIne,
+}) => {
   const [selectedOptions, setSelected] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [options, setOptions] = useState([]);
@@ -12,9 +17,9 @@ export default ({ municipios, setCodProv, setCity, setCodeIne }) => {
 
   useEffect(() => {
     if (selectedOptions.length > 0) {
-      setCodProv(selectedOptions[0].CODPROV);
-      setCity(selectedOptions[0].label);
-      setCodeIne(selectedOptions[0].CODIGOINE.substring(0, 5));
+      setCodigoProvincia(selectedOptions[0].CODPROV);
+      setNombreMunicipio(selectedOptions[0].label);
+      setCodigoIne(selectedOptions[0].CODIGOINE.substring(0, 5));
       console.log(selectedOptions);
     }
   }, [selectedOptions]);
@@ -35,7 +40,7 @@ export default ({ municipios, setCodProv, setCity, setCodeIne }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
 
     setLoading(false);
-    const cities = municipios.map((el) => {
+    const cities = listaMunicipios.map((el) => {
       return renameKey(el, 'NOMBRE', 'label');
     });
 

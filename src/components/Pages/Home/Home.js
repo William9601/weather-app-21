@@ -2,48 +2,64 @@ import './Home.css';
 import Header from '../../Header/Header';
 import Body from '../Body/Body';
 import { useEffect, useState } from 'react';
-import { fetchMunicipios, fetchMeteoData } from '../../../services/apiServices';
+import {
+  fetchMunicipios,
+  fetchPrevisionMeteo,
+} from '../../../services/apiServices';
 
 const Home = () => {
-  const [municipios, setMunicipios] = useState([]);
-  const [codProv, setCodProv] = useState('');
-  const [provincia, setProvincia] = useState('');
-  const [city, setCity] = useState('');
-  const [codeIne, setCodeIne] = useState('');
-  const [meteoData, setMeteoData] = useState([]);
-  const [lluviaData, setLluviaData] = useState('');
-  const [temperaturaData, setTemperaturaData] = useState('');
+  const [listaMunicipios, setListaMunicipios] = useState([]);
+  const [codigoProvincia, setCodigoProvincia] = useState('');
+  const [nombreProvincia, setNombreProvincia] = useState('');
+  const [nombreMunicipio, setNombreMunicipio] = useState('');
+  const [codigoIne, setCodigoIne] = useState('');
+  const [previsionLluvia, setPrevisionLluvia] = useState('');
+  const [temperaturaActual, setTemperaturaActual] = useState('');
+  const [localStorage, setLocalStorage] = useState({});
+  const [dataMeteo, setDataMeteo] = useState({});
 
   useEffect(() => {
-    fetchMunicipios().then((data) => setMunicipios(data));
+    fetchMunicipios().then((data) => setListaMunicipios(data));
+    const localData = window.localStorage.getItem('localData');
+    return localData ? JSON.parse(localData) : [];
   }, []);
 
   useEffect(() => {
-    fetchMeteoData(codProv, codeIne).then((data) => {
-      setMeteoData(data);
-      setLluviaData(data.lluvia);
-      setTemperaturaData(data.temperatura_actual);
-      setProvincia(data.municipio.NOMBRE_PROVINCIA);
-    });
-  }, [city]);
+    fetchPrevisionMeteo(codigoProvincia, codigoIne).then((data) => {
+      setPrevisionLluvia(data.lluvia);
+      setTemperaturaActual(data.temperatura_actual);
+      setNombreProvincia(data.municipio.NOMBRE_PROVINCIA);
 
-  return municipios.length > 0 ? (
+      const cardData = {
+        lluvia: data.lluvia,
+        temperaturaActual: data.temperatura_actual,
+        nombreProvincia: data.municipio.NOMBRE_PROVINCIA,
+        nombreMunicipio: data.municipio.NOMBRE,
+      };
+
+      window.localStorage.setItem('localData', JSON.stringify(cardData));
+
+      setLocalStorage(cardData);
+    });
+  }, [nombreMunicipio]);
+
+  return listaMunicipios.length > 0 ? (
     <div className="home-container">
       <Header
-        municipios={municipios}
-        setCodProv={setCodProv}
-        setCity={setCity}
-        setCodeIne={setCodeIne}
-        provincia={provincia}
+        listaMunicipios={listaMunicipios}
+        setCodigoProvincia={setCodigoProvincia}
+        setNombreMunicipio={setNombreMunicipio}
+        setCodigoIne={setCodigoIne}
+        nombreProvincia={nombreProvincia}
       />
       <Body
-        city={city}
-        temperaturaData={temperaturaData}
-        lluviaData={lluviaData}
+        nombreMunicipio={nombreMunicipio}
+        temperaturaActual={temperaturaActual}
+        previsionLluvia={previsionLluvia}
       />
     </div>
   ) : (
-    <p>loading</p>
+    <p>error when fetching data</p>
   );
 };
 

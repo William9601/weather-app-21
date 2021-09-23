@@ -1,15 +1,21 @@
 import './Header.css';
 import Search from '../Search/Search';
 
-const Header = ({ provincia, municipios, setCodProv, setCity, setCodeIne }) => {
+const Header = ({
+  nombreProvincia,
+  listaMunicipios,
+  setCodigoProvincia,
+  setNombreMunicipio,
+  setCodigoIne,
+}) => {
   return (
     <div className="header-container">
-      <h1>{provincia ? provincia : 'El Tiempo'}</h1>
+      <h1>{nombreProvincia ? nombreProvincia : 'El Tiempo'}</h1>
       <Search
-        municipios={municipios}
-        setCodProv={setCodProv}
-        setCodeIne={setCodeIne}
-        setCity={setCity}
+        listaMunicipios={listaMunicipios}
+        setCodigoProvincia={setCodigoProvincia}
+        setCodigoIne={setCodigoIne}
+        setNombreMunicipio={setNombreMunicipio}
       />
     </div>
   );

@@ -4,7 +4,7 @@ export const fetchMunicipios = async () => {
   return fetchData;
 };
 
-export const fetchMeteoData = async (codProv, codeIne) => {
+export const fetchPrevisionMeteo = async (codProv, codeIne) => {
   const res = await fetch(
     `https://www.el-tiempo.net/api/json/v2/provincias/${codProv}/municipios/${codeIne}`
   );

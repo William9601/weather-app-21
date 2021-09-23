@@ -2,15 +2,15 @@ import './Body.css';
 import Card from '../../Card/Card';
 import { municipios } from '../../../data';
 
-const Body = ({ city, temperaturaData, lluviaData }) => {
+const Body = ({ nombreMunicipio, temperaturaActual, previsionLluvia }) => {
   return (
     <div className="body-container">
       <div className="card-container">
-        {city ? (
+        {nombreMunicipio ? (
           <Card
-            city={city}
-            temperaturaData={temperaturaData}
-            lluviaData={lluviaData}
+            title={nombreMunicipio}
+            description={`Temperatura: ${temperaturaActual}º  Probabilidad de lluvia: ${previsionLluvia}`}
+            iconType={previsionLluvia === '0' ? 'cloudSunny' : 'cloudDrizzle'}
           />
         ) : (
           <h1>Por favor seleccione un municipio</h1>
