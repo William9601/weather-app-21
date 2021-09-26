@@ -1,0 +1,30 @@
+.body-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.body-container h1 {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 2em;
+}
+
+.select-card-container {
+  width: 70vh;
+  margin: 2em;
+}
+
+.prev-search-card {
+  width: 50vh;
+  margin: 3em 1em;
+}
+
+.prev-search-container {
+  display: flex;
+}
+
+.card-container h1 {
+  font-size: 24px;
+}
