@@ -20,7 +20,6 @@ export default ({
       setCodigoProvincia(selectedOptions[0].CODPROV);
       setNombreMunicipio(selectedOptions[0].label);
       setCodigoIne(selectedOptions[0].CODIGOINE.substring(0, 5));
-      console.log(selectedOptions);
     }
   }, [selectedOptions]);
 
@@ -36,9 +35,6 @@ export default ({
   const onSearchChange = useCallback((searchValue) => {
     setLoading(true);
     setOptions([]);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-
     setLoading(false);
     const cities = listaMunicipios.map((el) => {
       return renameKey(el, 'NOMBRE', 'label');
@@ -52,7 +48,6 @@ export default ({
   }, []);
 
   useEffect(() => {
-    // Simulate initial load.
     onSearchChange('');
   }, [onSearchChange]);
 

@@ -18,8 +18,6 @@ const Home = () => {
 
   useEffect(() => {
     fetchMunicipios().then((data) => setListaMunicipios(data));
-    // const localData = window.localStorage.getItem('fetchData');
-    // return localData ? JSON.parse(localData) : [];
   }, []);
 
   useEffect(() => {
@@ -36,12 +34,6 @@ const Home = () => {
       setPrevSearch([...prevSearch, fetchData]);
     });
   }, [nombreMunicipio]);
-
-  console.log(prevSearch);
-
-  // useEffect(() => {
-  //   window.localStorage.setItem('localData', JSON.stringify(globalData));
-  // }, [globalData]);
 
   return listaMunicipios.length > 0 ? (
     <div className="home-container">

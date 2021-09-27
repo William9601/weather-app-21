@@ -5,8 +5,8 @@ import { EuiCard, EuiIcon, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
 const Body = ({ globalData, prevSearch }) => {
   return (
     <div className="body-container">
-      <div className="select-card-container">
-        {globalData.nombreMunicipio ? (
+      {globalData.nombreMunicipio ? (
+        <div className="select-card-container">
           <Card
             title={globalData.nombreMunicipio}
             description={`Temperatura: ${globalData.temperaturaActual}º  Probabilidad de lluvia: ${globalData.previsionLluvia}`}
@@ -15,10 +15,10 @@ const Body = ({ globalData, prevSearch }) => {
             }
             layout={'vertical'}
           />
-        ) : (
-          <h1>Por favor seleccione un municipio</h1>
-        )}
-      </div>
+        </div>
+      ) : (
+        <h1>Por favor seleccione un municipio</h1>
+      )}
       {prevSearch.length > 1 ? <h1>Busquedas recientes</h1> : null}
       <div className="prev-search-container">
         {prevSearch &&
@@ -33,6 +33,7 @@ const Body = ({ globalData, prevSearch }) => {
                     iconType={
                       el.previsionLluvia === '0' ? 'cloudSunny' : 'cloudDrizzle'
                     }
+                    layout={'vertical'}
                   />
                 </div>
               )
